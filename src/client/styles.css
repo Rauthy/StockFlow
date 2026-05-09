@@ -17,7 +17,9 @@ body {
 }
 
 button,
-table {
+table,
+input,
+select {
   font: inherit;
 }
 
@@ -113,7 +115,13 @@ h2 {
   color: #92400e;
 }
 
+.banner.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
 .summary-grid,
+.intelligence-grid,
 .detail-grid {
   display: grid;
   gap: 20px;
@@ -124,11 +132,16 @@ h2 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.intelligence-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .detail-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .summary-card,
+.insight-card,
 .panel,
 .empty-state {
   background: rgba(255, 255, 255, 0.92);
@@ -139,12 +152,161 @@ h2 {
   padding: 20px;
 }
 
+.insight-card {
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.insight-card span {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.insight-card p {
+  line-height: 1.6;
+  color: #334155;
+}
+
 .summary-card span,
 .summary-card small,
 .panel-header p,
 .metric-stack span,
 .pill {
   color: #64748b;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.filter-bar label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.filter-bar input,
+.filter-bar select {
+  min-height: 40px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.ghost-button,
+.pagination button,
+.section-toggle {
+  border: none;
+  cursor: pointer;
+}
+
+.ghost-button {
+  min-height: 40px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 800;
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.inline-loading {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.collapsible-section {
+  margin-top: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.section-toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  text-align: left;
+  color: #0f172a;
+  background: #f8fafc;
+}
+
+.section-toggle span {
+  display: grid;
+  gap: 4px;
+}
+
+.section-toggle strong {
+  font-size: 17px;
+}
+
+.section-toggle small {
+  color: #64748b;
+}
+
+.section-toggle b {
+  color: #2563eb;
+}
+
+.section-body {
+  padding: 18px;
+}
+
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.task-card {
+  display: grid;
+  gap: 8px;
+  min-height: 104px;
+  padding: 16px;
+  border: 1px solid #dbeafe;
+  border-radius: 16px;
+  text-align: left;
+  background: #eff6ff;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.task-card:hover:not(:disabled) {
+  border-color: #60a5fa;
+  background: #dbeafe;
+}
+
+.task-card:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.task-card strong {
+  color: #1d4ed8;
+}
+
+.task-card span {
+  color: #475569;
+  line-height: 1.45;
 }
 
 .summary-card strong {
@@ -154,11 +316,11 @@ h2 {
 }
 
 .summary-card.positive {
-  border-color: rgba(22, 163, 74, 0.24);
+  border-color: rgba(220, 38, 38, 0.24);
 }
 
 .summary-card.negative {
-  border-color: rgba(220, 38, 38, 0.24);
+  border-color: rgba(22, 163, 74, 0.24);
 }
 
 .summary-card.neutral {
@@ -166,11 +328,11 @@ h2 {
 }
 
 .positive {
-  color: #15803d;
+  color: #b91c1c;
 }
 
 .negative {
-  color: #b91c1c;
+  color: #15803d;
 }
 
 .neutral {
@@ -205,6 +367,160 @@ h2 {
 .table-wrapper {
   margin-top: 18px;
   overflow-x: auto;
+}
+
+.compact-grid {
+  margin-top: 14px;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pagination div {
+  display: flex;
+  gap: 8px;
+}
+
+.pagination button {
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 800;
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  color: #94a3b8;
+  background: #e2e8f0;
+}
+
+.wide-cell {
+  max-width: 420px;
+  white-space: normal;
+  line-height: 1.5;
+}
+
+.subtext {
+  margin-top: 6px;
+  max-width: 520px;
+  white-space: normal;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.inline-empty {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+}
+
+.coverage-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.news-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.news-card {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  color: inherit;
+  text-decoration: none;
+  background: #ffffff;
+}
+
+.news-card:hover {
+  border-color: #bfdbfe;
+  background: #eff6ff;
+}
+
+.news-card div {
+  display: grid;
+  gap: 6px;
+}
+
+.news-card strong {
+  line-height: 1.45;
+}
+
+.news-card small,
+.news-card p {
+  color: #64748b;
+}
+
+.news-card p {
+  line-height: 1.55;
+}
+
+.sentiment {
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.sentiment.positive {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.sentiment.negative {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.sentiment.neutral {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.coverage-chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.coverage-chip.complete {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.coverage-chip.missing,
+.coverage-chip.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.coverage-chip.partial {
+  background: #fef3c7;
+  color: #92400e;
 }
 
 table {
@@ -251,7 +567,9 @@ tbody tr:hover,
 
 @media (max-width: 1080px) {
   .summary-grid,
-  .detail-grid {
+  .intelligence-grid,
+  .detail-grid,
+  .task-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -272,7 +590,9 @@ tbody tr:hover,
   }
 
   .summary-grid,
-  .detail-grid {
+  .intelligence-grid,
+  .detail-grid,
+  .task-grid {
     grid-template-columns: 1fr;
   }
 }

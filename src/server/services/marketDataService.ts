@@ -1,6 +1,7 @@
 import { buildMarketSummary, calculateFlowMetrics } from "../../shared/analytics.js";
 import type { AssetSnapshot, MarketSnapshot, SnapshotFreshness } from "../../shared/models.js";
 import { readSnapshot, writeSnapshot } from "../storage/snapshotStore.js";
+import { persistSnapshotToDatabase } from "./investmentIntelligenceService.js";
 import { fetchSinaAssetData } from "./sinaMarketClient.js";
 import { readWatchlist } from "./watchlistService.js";
 
@@ -50,6 +51,7 @@ export const refreshMarketData = async (): Promise<MarketSnapshot> => {
 
   const snapshot = createSnapshot(assetResults, "fresh");
   await writeSnapshot(snapshot);
+  await persistSnapshotToDatabase(snapshot);
   return snapshot;
 };
 

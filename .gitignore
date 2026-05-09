@@ -1,4 +1,5 @@
 node_modules
 dist
 data/market-snapshot.json
-
+data/*.sqlite
+data/*.sqlite-*
